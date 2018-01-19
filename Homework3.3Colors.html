@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html language="en">
+    <head>
+        <title>Homework #3 Colors - Ella</title>
+        <script>
+            function Colors() {
+                this._colors = [];
+                var privateCounter = {
+                    method: function () {
+                        var eventCounter = 0;
+                        return function () {
+                            eventCounter++;
+                            return eventCounter;
+                        };
+                    }
+                };
+                this.counter = privateCounter.method;
+                this.last = "";
+            }
+            Colors.prototype.addColor = function (color) {
+                this._colors.push(color);
+                this.last = color;
+            };
+            Colors.prototype.getColors = function () {
+                return this._colors;
+            };
+            let clrs = new Colors();
+            let colorBtn = document.getElementById("colorBtn");
+            colorBtn.addEventListener("click", function () {
+                clrs.addColor(colorBtn.value);
+                setTimeout(function () {
+                    alert(`Total times: ${clrs.counter}
+Event index: ${0}
+Current color: ${colorBtn.value}
+Event color: ${colorBtn.value}`);
+                }, 5000);
+            });
+        </script>
+    </head>
+    <body>
+        <input type="color" id="colorBtn"/>
+    </body>
+</html>
