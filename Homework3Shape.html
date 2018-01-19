@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html language="en">
+    <head>
+        <title>Homework #3 Shape - Ella</title>
+        <script>
+            function Shape(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.getDistance = function () {
+                    return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+                };
+                this.toString = function () {
+                    return `X = ${this.x} , Y = ${this.y} , Color = ${this.color}`;
+                };
+            }
+
+            let shapeTester = new Shape(3, 4, 'red');
+            console.log(shapeTester.getDistance());
+            console.log(shapeTester.toString());
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
