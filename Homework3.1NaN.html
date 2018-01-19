@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Homework #3 Closure - Ella</title>
+    <title>Homework #3.1 NaN - Ella</title>
     <script>
         function test(x) {
             return x != x;
         }
         console.log("NaN != NaN  ->  " + test(NaN)); //true
+        console.log("Symbol('foo') != Symbol('foo')  ->  " + test(Symbol('foo'))); //false
     </script>
 </head>
 <body>
