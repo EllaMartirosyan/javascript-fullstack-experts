@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html language="en">
+    <head>
+        <title>Homework #2 Objects - Ella</title>
+        <style>
+        </style>
+        <script>
+            let student = {
+                firstName: 'John',
+                lastName: 'Bryce',
+                address: 'Tel-Aviv',
+                grades: [],
+                addGrade: function (grade) {
+                    this.grades.push(grade);
+                },
+                getAverage: function () {
+                    let sum = eval(this.grades.join('+')), avg = sum / this.grades.length;
+                    return avg;
+                },
+                toString: function () {
+                    return `Full Name: ${this.firstName} ${this.lastName}
+Address: ${this.address}
+Grades: ${this.grades.join(', ')}
+Grades Average: ${this.getAverage()}`;
+                }
+            };
+            student.addGrade(87);
+            student.addGrade(93);
+            student.addGrade(78);
+            student.addGrade(100);
+            student.addGrade(92);
+            alert(student.toString());
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
