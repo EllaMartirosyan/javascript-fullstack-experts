@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html language="en">
+    <head>
+        <title>Homework #1 - Ella</title>
+        <style>
+            .center {
+                display: table;
+                margin: 0 auto;
+            }
+            .center > div {
+                margin: 10px;
+            }
+            .right {
+                float: right;
+            }
+            .bold {
+                font-weight: bold;
+            }
+            .rtl {
+                direction: rtl;
+            }
+            .space-20 {
+                height: 20px;
+            }
+            .space-30 {
+                height: 30px;
+            }
+            .width-90 {
+                width: 90%;
+            }
+        </style>
+        <script>
+            window.onload = function() {
+                //localStorage.clear();
+                setHistory();
+            };
+            function ddmmyyyy(d) {
+                if (!d) {
+                    d = new Date();
+                }
+                else {
+                    d = new Date(d);
+                }
+                let month = String(d.getMonth() + 1);
+                let day = String(d.getDate());
+                const year = String(d.getFullYear());
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+                return `${month}/${day}/${year}`;
+            }
+            function save() {
+                var name = document.getElementById("name");
+                var age = document.getElementById("age");
+                var birthdate = document.getElementById("birthdate");
+                var color = document.getElementById("color");
+                var user = {
+                    name: name.value,
+                    age: age.value,
+                    birthdate: ddmmyyyy(birthdate.value),
+                    color: color.value
+                };
+                var storedUsers = JSON.parse(localStorage.getItem("users"));
+                if (!storedUsers) {
+                    storedUsers = [];
+                }
+                storedUsers.push(user);
+                localStorage.setItem("users", JSON.stringify(storedUsers));
+                clear(name, age, birthdate, color);
+                setHistory();
+            }
+            function clear(name, age, birthdate, color) {
+                name.value = "";
+                age.value = "";
+                birthdate.value = "";
+                color.value = "#000000";
+            }
+            function setHistory() {
+                var storedUsers = JSON.parse(localStorage.getItem("users"));
+                var history = document.getElementById('history');
+                var historyHtml = "<ul class='rtl'>";
+                for (var i = 0; i < storedUsers.length; i++) {
+                    if (storedUsers[i].name || storedUsers[i].age || storedUsers[i].birthdate) {
+                        historyHtml += `<li style="color:${storedUsers[i].color}">`;
+                        if (storedUsers[i].name) {
+                            historyHtml += storedUsers[i].name;
+                        }
+                        if (storedUsers[i].age) {
+                            if (storedUsers[i].name) {
+                                historyHtml += "<br>";
+                            }
+                            historyHtml += storedUsers[i].age;
+                        }
+                        if (storedUsers[i].birthdate) {
+                            if (storedUsers[i].age || (!storedUsers[i].age && storedUsers[i].name)) {
+                                historyHtml += "<br>";
+                            }
+                            historyHtml += storedUsers[i].birthdate;
+                        }
+                        historyHtml += "</li>";
+                    }
+                }
+                historyHtml += "</ul>";
+                history.innerHTML = historyHtml;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="center">
+            <div><input type="text" id="name" placeholder="הכנס שם" class="rtl"/><div class="right bold">:שם</div></div>
+            <div><input type="number" id="age"/><div class="right bold">:גיל</div></div>
+            <div><input type="date" id="birthdate"/><div class="right bold">:תאריך לידה</div></div>
+            <div><input type="color" id="color"/><div class="right bold">:צבע מועדף</div></div>
+            <div class="space-20"></div>
+            <div class="width-90 space-10"><input type="button" value="שמור" onclick="save(); return false;" class="center"></input></div>
+        </div>
+        <div class="space-30"></div>
+        <div class="center space-30" id="history"/>
+    </body>
+</html>
