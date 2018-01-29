@@ -1,43 +1,116 @@
 <!DOCTYPE html>
 <html language="en">
-    <head>
-        <title>Homework #3 Colors - Ella</title>
-        <script>
-            function Colors() {
-                this._colors = [];
-                var privateCounter = {
-                    method: function () {
-                        var eventCounter = 0;
-                        return function () {
-                            eventCounter++;
-                            return eventCounter;
-                        };
-                    }
-                };
-                this.counter = privateCounter.method;
-                this.last = "";
-            }
-            Colors.prototype.addColor = function (color) {
-                this._colors.push(color);
-                this.last = color;
-            };
-            Colors.prototype.getColors = function () {
-                return this._colors;
-            };
-            let clrs = new Colors();
+
+<head>
+    <title>Homework #3.3 Colors - Ella</title>
+    <style>
+        .center {
+            display: table;
+            margin: 0 auto;
+        }
+
+        .label {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <input type="color" name="colorBtn"/>
+        <label for="colorBtn" class="label">:בחר צבע</label>
+    </div>
+
+    <script>
+        /*
+        window.onload = function () {
             let colorBtn = document.getElementById("colorBtn");
-            colorBtn.addEventListener("click", function () {
-                clrs.addColor(colorBtn.value);
-                setTimeout(function () {
-                    alert(`Total times: ${clrs.counter}
+            colorBtn.addEventListener("change", submit, false);
+        };
+
+        function Colors() {
+            this._colors = [];
+            var privateCounter = {
+                method: function () {
+                    var eventCounter = 0;
+                    return function () {
+                        eventCounter++;
+                        return eventCounter;
+                    };
+                }
+            };
+            this.counter = privateCounter.method;
+            this.last = "";
+        }
+        Colors.prototype.addColor = function (color) {
+            this._colors.push(color);
+            this.last = color;
+        };
+        Colors.prototype.getColors = function () {
+            return this._colors;
+        };
+
+        let clrs = new Colors();
+
+        function submit(event) {
+            let colorBtn = document.getElementById("colorBtn");
+            clrs.addColor(event.target.value);
+            setTimeout(function () {
+                alert(`Total times: ${clrs.counter()}
 Event index: ${0}
 Current color: ${colorBtn.value}
-Event color: ${colorBtn.value}`);
-                }, 5000);
-            });
-        </script>
-    </head>
-    <body>
-        <input type="color" id="colorBtn"/>
-    </body>
+Event color: ${event.target.value}`);
+            }, 5000);
+        }
+*/
+        let colorPicker = (() => {
+            let totalTimes = 0;
+            let current_color = "none";
+            let last_color;
+            let click_index = 0;
+            let setEventListener = function () {
+                let colorBtn = document.querySelector('input[name=colorBtn]');
+                colorBtn.addEventListener('change', function (event) {
+                    setAndDisplayData(event);
+                }, false);
+            }();
+
+            let setAndDisplayData = function (event) {
+                setData(event);
+                displayData(click_index);
+            }
+
+            let setData = function (event) {
+                totalTimes++;
+                click_index++;
+                last_color = current_color;
+                current_color = event.target.value;
+            }
+
+            let displayData = function (click_index) { // pass it as parameter to keep click index current value 
+                // basicaly its the same as creating a local variable : let click_index  = times;
+                let return_obj = {
+                    totalTimes: totalTimes,
+                    click_index: click_index,
+                    current_color: current_color,
+                    last_color: last_color
+                }
+                return_obj.toString = function () {
+                    return `
+                    totalTimes : ${totalTimes}
+                    index: ${click_index}
+                    color : ${current_color}
+                    last color : ${last_color}`;
+                }
+                setTimeout(function () {
+                    alert(return_obj);
+                }, 5000)
+            }
+
+            return setAndDisplayData;
+
+        })();
+    </script>
+</body>
+
 </html>
