@@ -1,0 +1,15 @@
+.people-info-list {
+    display: table;
+    margin: 0 auto;
+    border: solid thick red;
+    border-radius: 4px;
+    padding: 20px 100px 20px 40px;
+}
+
+.people-info-item {
+    padding-bottom: 10px;
+}
+
+.bold {
+    font-weight: bold;
+}
