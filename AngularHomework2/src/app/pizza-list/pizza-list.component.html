@@ -1,0 +1,22 @@
+<section>
+    <h3>Current Pizza Orders:</h3>
+    <table border="1" *ngIf="pizzas?.length; else noPizzas">
+        <tr>
+            <th>#</th>
+            <th>Diameter</th>
+            <th>Slices</th>
+            <th>Toppings</th>
+            <th>Price</th>
+        </tr>
+        <tr *ngFor="let p of pizzas">
+            <td>{{p.orderNumber}}</td>
+            <td>{{p.diameter}} cm</td>
+            <td>{{p.slices}}</td>
+            <td>{{p.toppings}}</td>
+            <td>{{p.price | currency:'USD'}}</td>
+        </tr>
+    </table>
+    <ng-template #noPizzas>
+        <h2>There are no pizza orders.</h2>
+    </ng-template>
+</section>

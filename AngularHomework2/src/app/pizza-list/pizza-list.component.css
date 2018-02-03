@@ -1,0 +1,19 @@
+section {
+    margin: 20px;
+}
+
+table {
+    margin: auto;
+}
+
+th {
+    background-color: lightgray;
+}
+
+tr:nth-child(even) {
+    background-color: lightblue;
+}
+
+tr:nth-child(odd) {
+    background-color: lightgreen;
+}
